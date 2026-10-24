@@ -1,6 +1,6 @@
 # Codemetr Skills
 
-Portable C# code-quality skills for **Claude Code** and **Codex CLI**, powered by
+Portable C# code-quality skills for **Claude Code**, **GitHub Copilot CLI** and **Codex CLI**, powered by
 the [Codemetr .NET tool](https://github.com/codemetr/Codemetr.CSharp).
 
 | Plugin | Skills |
@@ -41,6 +41,20 @@ Start a new session (or reload plugins), then invoke:
 /codemetr-csharp:guard
 ```
 
+### GitHub Copilot CLI
+
+In your terminal, using a current Copilot CLI with plugin support:
+
+```bash
+copilot plugin marketplace add codemetr/skills
+copilot plugin install codemetr-csharp@codemetr-skills
+```
+
+Start a new Copilot session in your C# repository and ask, for example:
+"Zeige mir die Code-Metriken dieses C#-Projekts."
+Inside an interactive session, the equivalent commands start with
+`/plugin marketplace add` and `/plugin install`.
+
 ### Codex CLI
 
 Use a current Codex CLI with plugin marketplace support:
@@ -54,9 +68,11 @@ Start a new session and ask to analyze C# code or run the Codemetr guard. The
 plugin browser and installation UI depend on the host and CLI version.
 
 Both marketplace manifests reference the same plugin and `SKILL.md` files.
-Claude Code uses `.claude-plugin/marketplace.json`; Codex uses
+Claude Code and Copilot CLI use `.claude-plugin/marketplace.json`; Codex uses
 `.agents/plugins/marketplace.json` and a `.codex-plugin/plugin.json` compatibility
-manifest. Other clients may support the portable skills, but are not yet tested.
+manifest. Copilot CLI compatibility follows GitHub's documented manifest support;
+installation and skill activation have not yet been runtime-tested in Copilot.
+Other clients may support the portable skills, but are not yet tested.
 
 ## A skill is not mandatory enforcement
 

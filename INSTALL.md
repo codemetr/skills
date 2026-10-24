@@ -4,7 +4,7 @@
 
 ## 1. Prerequisites
 
-- A current Claude Code or Codex CLI with plugin marketplace support.
+- A current Claude Code, GitHub Copilot CLI or Codex CLI with plugin marketplace support.
 - The **.NET 10 SDK**, available from https://dotnet.microsoft.com/download/dotnet/10.0.
 - Network access for marketplace downloads and NuGet package installation.
 - A C# repository to analyze. The Codemetr tool's source code is not required.
@@ -84,6 +84,30 @@ Claude Code version. From the target C# repository, invoke:
 /codemetr-csharp:guard
 ```
 
+### GitHub Copilot CLI
+
+In your terminal:
+
+```bash
+copilot plugin marketplace add codemetr/skills
+copilot plugin install codemetr-csharp@codemetr-skills
+copilot plugin list
+```
+
+Alternatively, inside an interactive Copilot session:
+
+```text
+/plugin marketplace add codemetr/skills
+/plugin install codemetr-csharp@codemetr-skills
+```
+
+Start a new session in the target C# repository and use a natural-language
+request such as "Prüfe meine C#-Änderungen auf Codequalität." Copilot CLI reads
+the existing `.claude-plugin/marketplace.json` and plugin manifest, so no separate
+Copilot manifest is required. This is the Copilot **CLI** setup, not a VS Code
+extension setup. Compatibility is based on GitHub documentation; installation
+and automatic skill activation have not yet been runtime-tested in Copilot.
+
 ### Codex CLI
 
 In your terminal:
@@ -110,7 +134,7 @@ registration command alone does not mean the plugin has been installed.
 
 ## Use natural-language requests
 
-In either client, you can ask without naming the tool or skill:
+In any of these clients, you can ask without naming the tool or skill:
 
 ```text
 Zeige mir die Code-Metriken dieses C#-Projekts und erkläre die Hotspots.
@@ -160,6 +184,13 @@ For Claude Code, inside a session:
 /plugin update codemetr-csharp@codemetr-skills
 ```
 
+For GitHub Copilot CLI, refresh the catalog and update the plugin:
+
+```bash
+copilot plugin marketplace update codemetr-skills
+copilot plugin update codemetr-csharp@codemetr-skills
+```
+
 For Codex, refresh the marketplace and use `/plugins` to review available updates:
 
 ```bash
@@ -205,6 +236,7 @@ before switching to GitHub.
 | --- | --- |
 | Marketplace cannot be found | The files must be published on GitHub. For unpublished work, use a local checkout as described above. |
 | Codex has no plugin commands or browser | Update to a CLI version supporting plugin marketplaces; confirm with `codex plugin marketplace --help`. |
+| Copilot has no plugin commands | Update GitHub Copilot CLI and check `copilot plugin --help`. These instructions do not target the legacy `gh copilot` extension. |
 | Claude skill is missing | Verify the plugin is installed and enabled, then start a new session. |
 | Tool command is missing | Restore the local tool from the target repository, or check `PATH` for a global installation. |
 | SDK or runtime error | Check the installed .NET 10 SDK and the target repository's `global.json`. |
@@ -216,5 +248,7 @@ before switching to GitHub.
 
 - [Claude Code marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
 - [Codex plugins](https://developers.openai.com/codex/plugins)
+- [GitHub Copilot CLI plugin installation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing)
+- [GitHub Copilot CLI manifest support](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)
 - [Codemetr tool documentation](https://github.com/codemetr/Codemetr.CSharp)
 - [Security guidance](SECURITY.md)
