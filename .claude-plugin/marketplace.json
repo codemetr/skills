@@ -1,0 +1,12 @@
+{
+  "name": "codemetr-skills",
+  "description": "Portable Codemetr code-quality skills for coding agents.",
+  "owner": { "name": "codemetr" },
+  "plugins": [
+    {
+      "name": "codemetr-csharp",
+      "source": "./plugins/codemetr-csharp",
+      "description": "Analyze C# code metrics and enforce existing quality guards with the Codemetr .NET tool."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# Copy to .github/workflows/codemetr-guard.yml in a consuming C# repository.
+# Requires a committed .config/dotnet-tools.json containing Codemetr.CSharp.Tool
+# and a global.json selecting a compatible .NET 10 SDK.
+name: codemetr-guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - run: dotnet tool restore
+      - run: dotnet tool run codemetr-csharp check --format text

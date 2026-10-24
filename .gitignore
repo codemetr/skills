@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key
+artifacts/
+*-workspace/
+.claude/settings.local.json

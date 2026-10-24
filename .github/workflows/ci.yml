@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Smoke-test published tool without its source
+        shell: bash
+        run: |
+          dotnet tool install Codemetr.CSharp.Tool --version 0.0.1 --tool-path "$RUNNER_TEMP/codemetr-tool" --source https://api.nuget.org/v3/index.json
+          "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" --help
+          "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" check tests/fixtures/clean --format json

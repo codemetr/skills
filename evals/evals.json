@@ -1,0 +1,29 @@
+{
+  "skill_name": "codemetr-csharp",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analyze the C# sources in this repository and explain the main complexity and coupling hotspots. Do not change files. The local Codemetr tool is already restored.",
+      "expected_output": "Runs analyze from the target repository, reports measured findings and scope, preserves files, and does not mistake analyze exit 0 for a passing guard.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Run the Codemetr guard for my C# changes. It reports new violations and stale baseline entries. Make it pass, but do not change our quality policy or baseline without asking.",
+      "expected_output": "Inspects the full check, fixes code only within the requested scope, asks before mutating baseline, preserves limits/exclusions, runs tests and repeats the full guard before claiming success.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Check my C# code with Codemetr. The command is not installed, and this repository has no tool manifest. Do not install software without asking.",
+      "expected_output": "Proactively offers exact pinned local-tool setup commands and their impact, requests approval before executing them, and reports the check as blocked until setup succeeds. If approval follows, performs setup, verifies the tool and resumes the full check.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Continue the Codemetr setup we discussed: I approve creating a local tool manifest in this C# repository, installing Codemetr.CSharp.Tool 0.0.1 from NuGet, and running the full guard. The .NET 10 SDK is available and no tool manifest exists. Do not install a global tool or change our quality rules.",
+      "expected_output": "Creates the approved local manifest, installs the approved version, verifies the local tool with --help and runs the full check. Preserves guard policy, reports the actual exit code, and does not switch to a global installation or different version on failure.",
+      "files": []
+    }
+  ]
+}

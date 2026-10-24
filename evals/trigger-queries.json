@@ -1,0 +1,12 @@
+[
+  { "query": "Zeige mir die Code-Metriken dieses C#-Projekts und priorisiere die Klassen, die wir refaktorieren sollten. Bitte nichts ändern.", "skill": "analyze", "should_trigger": true },
+  { "query": "Welche Klassen in unserer .NET-Anwendung haben eine hohe Komplexität oder Kopplung? Miss das bitte anhand der Quellen.", "skill": "analyze", "should_trigger": true },
+  { "query": "Analyze maintainability and nesting hotspots in the C# sources before we plan the refactoring.", "skill": "analyze", "should_trigger": true },
+  { "query": "Prüfe meine C#-Änderungen auf Codequalität und Grenzwertverletzungen, ohne unsere Regeln oder Baseline zu ändern.", "skill": "guard", "should_trigger": true },
+  { "query": "Check whether this C# refactoring worsens our complexity metrics and verify the full quality gate.", "skill": "guard", "should_trigger": true },
+  { "query": "Nach dem Refactoring sollst du unsere Qualitätsregeln für C# prüfen und neue Verstöße melden.", "skill": "guard", "should_trigger": true },
+  { "query": "Erkläre mir allgemein, was zyklomatische Komplexität bedeutet. Keine Repository-Analyse nötig.", "skill": "analyze", "should_trigger": false },
+  { "query": "Miss Komplexität und Kopplung unseres Python-Pakets. Dieses Repository enthält keinen C#-Code.", "skill": "analyze", "should_trigger": false },
+  { "query": "Prüfe unser C#-Projekt ausschließlich auf bekannte Sicherheitslücken in NuGet-Abhängigkeiten.", "skill": "guard", "should_trigger": false },
+  { "query": "Führe nur die bestehenden C#-Unit-Tests aus und melde deren Ergebnis, keine weiteren Qualitätsprüfungen.", "skill": "guard", "should_trigger": false }
+]
