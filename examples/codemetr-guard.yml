@@ -1,6 +1,8 @@
 # Copy to .github/workflows/codemetr-guard.yml in a consuming C# repository.
 # Requires a committed .config/dotnet-tools.json containing Codemetr.CSharp.Tool
+# (see examples/dotnet-tools.json for a new project, tool version 0.1.0)
 # and a global.json selecting a compatible .NET 10 SDK.
+# Keep an existing project pin unless its upgrade is explicitly approved.
 name: codemetr-guard
 
 on:
@@ -21,4 +23,4 @@ jobs:
         with:
           global-json-file: global.json
       - run: dotnet tool restore
-      - run: dotnet tool run codemetr-csharp check --format text
+      - run: dotnet tool run codemetr-csharp -- check --format text

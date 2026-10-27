@@ -33,7 +33,17 @@ the format option. Preserve the configured context so coupling and inheritance
 are comparable. For an existing global installation, omit `dotnet tool run`.
 
 Inspect the JSON report, including warnings, parse errors, skipped files, metrics
-and hotspots. An `analyze` exit code of 0 does not mean the guard passed: analyze
+and hotspots. With tool 0.1.0 or later, also inspect `wholeTypes`, `completeness`,
+`dependencies`, member `cognitiveComplexity`, and `cohesion` when present.
+Dependency cycles are limited to the selected source graph, cognitive complexity
+is a documented heuristic, and cohesion can be inapplicable. Do not treat these
+advisory values as new default guard failures. For a user-supplied mutation
+report, use `--mutation-report FILE` only with a version that supports it;
+distinguish imported counts from tests actually run and do not invent a final
+score for pending or empty results. Preserve an older pinned tool and report
+feature unavailability instead of silently upgrading it.
+
+An `analyze` exit code of 0 does not mean the guard passed: analyze
 reports violations without failing on them. Do not invent measurements if the
 command cannot run. Report the blocker instead.
 

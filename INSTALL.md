@@ -34,7 +34,7 @@ If there is no existing tool manifest:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install Codemetr.CSharp.Tool --version 0.0.1
+dotnet tool install Codemetr.CSharp.Tool --version 0.1.0
 dotnet tool run codemetr-csharp --help
 ```
 
@@ -53,7 +53,7 @@ Installation and restoration use your configured NuGet sources.
 ### Alternative: global installation
 
 ```bash
-dotnet tool install --global Codemetr.CSharp.Tool --version 0.0.1
+dotnet tool install --global Codemetr.CSharp.Tool --version 0.1.0
 codemetr-csharp --help
 ```
 
