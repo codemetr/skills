@@ -21,6 +21,8 @@ keyword hooks. Explicit skill invocation remains available when needed.
 ## Quick start
 
 Requires the .NET 10 SDK and the separately installed `Codemetr.CSharp.Tool`.
+New installations target tool **0.1.0**; plugin **0.2.0** has an independent
+version. Existing projects keep their pinned tool unless an upgrade is approved.
 If prerequisites are missing, the skills offer to install or restore them, wait
 for confirmation, then verify setup and continue the requested task.
 Marketplace commands work once these files are published on the default branch.
@@ -78,7 +80,8 @@ Other clients may support the portable skills, but are not yet tested.
 
 Skills guide an agent; they do not automatically run after every edit and do not
 install hooks. Keep a full check in required CI to enforce quality before merges.
-See [the example workflow](examples/codemetr-guard.yml). It assumes the target
+See [the example workflow](examples/codemetr-guard.yml) and
+[tool-manifest setup](examples/README.md). It assumes the target
 repository has committed a tool manifest containing Codemetr and an appropriate
 `global.json`. This marketplace's own CI validates its packaging and smoke-tests
 the published tool; it does not enforce a consuming project's quality gate.

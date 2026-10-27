@@ -1,8 +1,10 @@
 {
   "name": "codemetr-csharp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Analyze C# code metrics and enforce existing quality guards with the Codemetr .NET tool.",
   "license": "MIT",
-  "author": { "name": "codemetr" },
+  "author": {
+    "name": "codemetr"
+  },
   "skills": "./skills/"
 }

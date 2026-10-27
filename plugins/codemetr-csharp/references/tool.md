@@ -38,19 +38,19 @@ local installation can be created from the target repository root:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install Codemetr.CSharp.Tool --version 0.0.1
+dotnet tool install Codemetr.CSharp.Tool --version 0.1.0
 dotnet tool run codemetr-csharp --help
 ```
 
 Do not create or overwrite a manifest that already exists. If the tool is
 already declared but not restored, ask before running `dotnet tool restore`.
 Do not automatically update a pinned version. The plugin version and tool
-version are independent; these instructions initially target tool `0.0.1`.
+version are independent; new installations in these examples target tool `0.1.0`.
 
 A global installation is an alternative, also requiring permission:
 
 ```bash
-dotnet tool install --global Codemetr.CSharp.Tool --version 0.0.1
+dotnet tool install --global Codemetr.CSharp.Tool --version 0.1.0
 codemetr-csharp --help
 ```
 
@@ -58,6 +58,26 @@ Installing and restoring from NuGet requires network access. Analysis itself is
 local and does not require uploading source. Package sources are determined by
 the user's NuGet configuration; never ask for credentials in chat or write them
 into the repository.
+
+## Additional measurements in tool 0.1.0
+
+The JSON report preserves declaration-level `types` and adds `wholeTypes`,
+`completeness`, `dependencies`, member `cognitiveComplexity` and `cohesion`.
+A selected dependency graph is not the full project or runtime graph. Cognitive
+complexity is a documented heuristic; cohesion is meaningful only when marked
+applicable. Treat the extra measurements as review signals, not default rules.
+
+`--mutation-report FILE` imports a Stryker JSON scoring subset; it does not run
+Stryker or verify the report against current source. Pending or empty results do
+not establish a final score. Never present synthetic examples as real test data.
+
+Whole-partial-type guard checks require deliberate opt-in with
+`"aggregatePartialTypes": true` in `codemetr.json`. This changes policy and needs
+approval; preserve existing thresholds and baseline ratchets. Reuse a repository's
+older pinned version if present, explaining which new features are unavailable.
+
+See the [runnable upstream examples](https://github.com/codemetr/Codemetr.CSharp/tree/main/examples)
+and [measurement definitions](https://github.com/codemetr/Codemetr.CSharp/blob/main/docs/measurement-definitions.md).
 
 ## Commands
 
