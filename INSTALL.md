@@ -74,6 +74,7 @@ Inside a Claude Code session:
 ```text
 /plugin marketplace add codemetr/skills
 /plugin install codemetr-csharp@codemetr-skills
+/plugin install codemetr-csharp-cover@codemetr-skills
 ```
 
 Start a new session, or reload plugins using the command supported by your
@@ -82,6 +83,8 @@ Claude Code version. From the target C# repository, invoke:
 ```text
 /codemetr-csharp:analyze
 /codemetr-csharp:guard
+/codemetr-csharp-cover:coverage
+/codemetr-csharp-cover:coverage-guard
 ```
 
 ### GitHub Copilot CLI
@@ -149,6 +152,43 @@ work as well. The client/model selects skills using their descriptions and the
 task context, not a deterministic keyword match. A plugin must be installed and
 enabled in the session. If it is not selected, invoke the skill explicitly or
 ask the agent to use it. This does not create automatic hooks after every edit.
+
+## Coverage plugin
+
+`codemetr-csharp-cover` needs its own tool, `Codemetr.CSharp.Cover.Tool`, and a
+coverage engine in every test project. From the target C# repository root, with
+an existing manifest (otherwise `dotnet new tool-manifest` first):
+
+```bash
+dotnet tool install Codemetr.CSharp.Cover.Tool --version 0.1.0
+dotnet tool run codemetr-csharp-cover doctor --format text
+```
+
+`doctor` lists each test project with its platform and engine, and prints the
+exact command for anything missing, for example:
+
+```bash
+dotnet add tests/Shop.Tests/Shop.Tests.csproj package coverlet.collector   # VSTest: xUnit v2, NUnit, MSTest
+dotnet add tests/Shop.Api.Tests/Shop.Api.Tests.csproj package coverlet.MTP # Microsoft.Testing.Platform, 10 or later
+```
+
+Adding a package changes the test project; review and commit it like any other
+change. The skills ask before running these commands. Then verify:
+
+```bash
+dotnet tool run codemetr-csharp-cover analyze --format text
+dotnet tool run codemetr-csharp-cover check --base origin/main --format text
+```
+
+`analyze` never fails on findings; `check` returns 0 passed, 1 findings
+(including failed tests), 2 input error or untrustworthy coverage evidence.
+`codemetr-cover.json` sets thresholds and `codemetr-cover.baseline.json` records
+coverage floors; changing either needs approval. For CI, adapt the
+[coverage workflow](examples/codemetr-cover-guard.yml).
+
+Example requests: "Wie hoch ist die Testabdeckung dieses Projekts?" fits
+`coverage`; "Prüfe, ob meine Änderungen durch Tests abgedeckt sind" fits
+`coverage-guard`.
 
 ## 4. Verify the tool and scope
 
@@ -251,4 +291,5 @@ before switching to GitHub.
 - [GitHub Copilot CLI plugin installation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing)
 - [GitHub Copilot CLI manifest support](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference)
 - [Codemetr tool documentation](https://github.com/codemetr/Codemetr.CSharp)
+- [Codemetr cover tool documentation](https://github.com/codemetr/Codemetr.CSharp.Cover)
 - [Security guidance](SECURITY.md)

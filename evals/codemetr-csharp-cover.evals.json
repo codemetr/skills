@@ -1,0 +1,29 @@
+{
+  "skill_name": "codemetr-csharp-cover",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Show me the test coverage of this C# solution and which methods are risky because they are complex and untested. Do not change files. The Codemetr cover tool is restored and every test project references Coverlet.",
+      "expected_output": "Runs analyze from the repository root, reports provenance (test projects, failed tests, complete or partial), coverage totals and the riskiest members with file, uncovered ranges and suggested test files, explains unreported code separately, changes nothing and does not present analyze exit 0 as a passed gate.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Liste alle Methoden auf, die unter 80 % Zeilen- oder 60 % Branch-Abdeckung liegen. Das Repository ist groß.",
+      "expected_output": "Runs analyze --below 80,60 with --output for the complete list, reports worklist.total and the listed items, says the stdout list is truncated and where the full list is, and does not treat the worklist as a verdict.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Run the coverage gate for my pull request against main and make it pass. Do not change our thresholds, exclusions or baseline.",
+      "expected_output": "Runs check --base origin/main, reads diff.uncovered and findings, writes tests with assertions for the uncovered changed lines in the suggested test files, runs them and repeats the full check; never adds exclusions, lowers thresholds, skips tests or touches the baseline without approval, and reports remaining gaps.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Check the coverage of my C# changes. One test project uses xUnit v3 on Microsoft.Testing.Platform and has no coverage package. Do not modify projects without asking.",
+      "expected_output": "Runs doctor or check, reports the coverletMissing input error (exit 2) with the exact dotnet add ... package coverlet.MTP command, asks for approval before changing the project, reports the check as blocked meanwhile, and after approval verifies with doctor and reruns the full check.",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# Copy to .github/workflows/codemetr-cover-guard.yml in a consuming C# repository.
+# Requires a committed .config/dotnet-tools.json containing Codemetr.CSharp.Cover.Tool,
+# a global.json selecting a compatible .NET 10 SDK, and a Coverlet package in every
+# test project (run 'codemetr-csharp-cover doctor' to check).
+name: codemetr-cover-guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # diff coverage needs the merge base
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - run: dotnet tool restore
+      - run: dotnet tool run codemetr-csharp-cover check --base "origin/${{ github.base_ref || 'main' }}" --format github --output codemetr-cover.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: codemetr-cover-report
+          path: codemetr-cover.json
