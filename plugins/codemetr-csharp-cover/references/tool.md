@@ -47,7 +47,7 @@ With user approval, a new local installation from the target repository root:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install Codemetr.CSharp.Cover.Tool --version 0.1.0
+dotnet tool install Codemetr.CSharp.Cover.Tool --version 0.1.1
 dotnet tool run codemetr-csharp-cover --help
 dotnet tool run codemetr-csharp-cover doctor --format text
 ```
@@ -55,8 +55,8 @@ dotnet tool run codemetr-csharp-cover doctor --format text
 Do not create or overwrite a manifest that already exists; add the tool to it
 instead. If the tool is declared but not restored, ask before `dotnet tool
 restore`. Do not update a pinned version automatically. Plugin and tool versions
-are independent; these instructions target tool `0.1.0`. A global installation
-(`dotnet tool install --global Codemetr.CSharp.Cover.Tool --version 0.1.0`) also
+are independent; these instructions target tool `0.1.1`. A global installation
+(`dotnet tool install --global Codemetr.CSharp.Cover.Tool --version 0.1.1`) also
 needs permission. Restoring from NuGet needs network access; measuring is local.
 Never ask for credentials in chat or write them into the repository.
 
@@ -67,7 +67,7 @@ Run from the target repository root. The examples assume a local tool:
 ```bash
 dotnet tool run codemetr-csharp-cover doctor --format text
 dotnet tool run codemetr-csharp-cover analyze --format json
-dotnet tool run codemetr-csharp-cover analyze --below 80,60 --format json --output cover-worklist.json
+dotnet tool run codemetr-csharp-cover analyze --below 80,60 --format json --output TestResults/cover-worklist.json
 dotnet tool run codemetr-csharp-cover analyze --member OrderService.Submit --format text
 dotnet tool run codemetr-csharp-cover check --format json
 dotnet tool run codemetr-csharp-cover check --base origin/main --format json

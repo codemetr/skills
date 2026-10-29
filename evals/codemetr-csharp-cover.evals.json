@@ -24,6 +24,12 @@
       "prompt": "Check the coverage of my C# changes. One test project uses xUnit v3 on Microsoft.Testing.Platform and has no coverage package. Do not modify projects without asking.",
       "expected_output": "Runs doctor or check, reports the coverletMissing input error (exit 2) with the exact dotnet add ... package coverlet.MTP command, asks for approval before changing the project, reports the check as blocked meanwhile, and after approval verifies with doctor and reruns the full check.",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Warum ist die Abdeckung von OrderService seit gestern auf 0 % gefallen? Der Coverage-Check meldet coverageDropped für mehrere Member.",
+      "expected_output": "Runs analyze or check, reads provenance test counts and findings such as skippedTestsIncreased, names a cause only when evidence supports it (for example a skipped test, a filter, a different configuration or environment than CI), otherwise says the cause is unverified, and does not blame a commit by guesswork.",
+      "files": []
     }
   ]
 }

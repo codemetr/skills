@@ -1,6 +1,6 @@
 {
   "name": "codemetr-csharp-cover",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Check C# test coverage per type and member, diff coverage, CRAP risk and coverage worklists with the Codemetr cover .NET tool.",
   "license": "MIT",
   "author": { "name": "codemetr" },

@@ -51,7 +51,7 @@ Start a new session (or reload plugins), then invoke:
 /codemetr-csharp-cover:coverage-guard
 ```
 
-The coverage plugin needs `Codemetr.CSharp.Cover.Tool` **0.1.0** and a Coverlet package in each test project
+The coverage plugin needs `Codemetr.CSharp.Cover.Tool` **0.1.1** and a Coverlet package in each test project
 (`coverlet.collector` on VSTest, `coverlet.MTP` on Microsoft.Testing.Platform); see the
 [coverage setup](INSTALL.md#coverage-plugin).
 

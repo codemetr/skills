@@ -27,16 +27,21 @@ Pick the command that answers the question:
 ```bash
 dotnet tool run codemetr-csharp-cover analyze --format json                     # overview and riskiest members
 dotnet tool run codemetr-csharp-cover analyze --below 80,60 --format json \
-  --output cover-worklist.json                                                  # every member below 80 % line / 60 % branch
+  --output TestResults/cover-worklist.json                                      # every member below 80 % line / 60 % branch
 dotnet tool run codemetr-csharp-cover analyze --member Submit --format text     # one member's lines and branches
 ```
 
-Use the thresholds the user names; without them, `--below` alone takes the
-repository's `worklist` setting. For files or types, add `--level file` or
+Use the thresholds the user names. If `codemetr-cover.json` sets `worklist`,
+`--below` alone uses it; otherwise pass explicit thresholds such as `80,60` and
+say that you chose them. `--output` already writes the complete report; keep it
+in an ignored folder such as `TestResults/` instead of redirecting stdout. For files or types, add `--level file` or
 `--level type`. For an existing global installation, omit `dotnet tool run`.
 
 Inspect provenance (test projects, failed tests, partial reasons), warnings,
-`unreported` and `exclusions` before interpreting numbers. A worklist and an
+`unreported` and `exclusions` before interpreting numbers. Explain a coverage
+drop only from measured evidence, such as skipped tests (`skippedTestsIncreased`,
+test counts), filters, build configuration or environment differences from CI;
+otherwise say the cause is unverified instead of blaming a commit. A worklist and an
 `analyze` exit code of 0 are never a passing gate. Do not invent coverage values
 if the command cannot run; report the blocker instead.
 
