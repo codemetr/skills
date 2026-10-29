@@ -27,3 +27,8 @@ jobs:
           dotnet tool install Codemetr.CSharp.Tool --version 0.1.0 --tool-path "$RUNNER_TEMP/codemetr-tool" --source https://api.nuget.org/v3/index.json
           "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" --help
           "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" check tests/fixtures/clean --format json
+      - name: Smoke-test published cover tool without its source
+        shell: bash
+        run: |
+          dotnet tool install Codemetr.CSharp.Cover.Tool --version 0.1.0 --tool-path "$RUNNER_TEMP/codemetr-cover-tool" --source https://api.nuget.org/v3/index.json
+          "$RUNNER_TEMP/codemetr-cover-tool/codemetr-csharp-cover" --help
