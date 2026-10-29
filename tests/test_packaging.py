@@ -81,6 +81,12 @@ class PackagingTests(unittest.TestCase):
                 self.assertTrue(resolved.is_relative_to(path.parents[2]), target)
                 self.assertTrue(resolved.is_file(), target)
 
+    def test_cover_skills_explain_drops_only_from_evidence(self):
+        for skill in ("coverage", "coverage-guard"):
+            text = (ROOT / "plugins/codemetr-csharp-cover/skills" / skill / "SKILL.md").read_text(encoding="utf-8")
+            self.assertIn("skippedTestsIncreased", text, skill)
+            self.assertIn("unverified", text, skill)
+
     def test_eval_prompts_are_unique(self):
         for plugin, spec in PLUGINS.items():
             document = load(spec["evals"])

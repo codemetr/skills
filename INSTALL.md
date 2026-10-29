@@ -160,7 +160,7 @@ coverage engine in every test project. From the target C# repository root, with
 an existing manifest (otherwise `dotnet new tool-manifest` first):
 
 ```bash
-dotnet tool install Codemetr.CSharp.Cover.Tool --version 0.1.0
+dotnet tool install Codemetr.CSharp.Cover.Tool --version 0.1.1
 dotnet tool run codemetr-csharp-cover doctor --format text
 ```
 

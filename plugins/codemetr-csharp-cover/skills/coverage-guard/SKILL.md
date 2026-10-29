@@ -34,7 +34,9 @@ command.
   feedback only. Do not imply that unmeasured code passed.
 - **1:** findings. `diffLineCoverage`/`diffBranchCoverage` and `diff.uncovered`
   name the changed lines without tests; `crapScore` names complex, poorly tested
-  members; `coverageDropped` means recorded coverage fell; `testsFailed` means the
+  members; `coverageDropped` means recorded coverage fell (name its cause only from
+  evidence such as `skippedTestsIncreased`, filters or a configuration or
+  environment that differs from CI, otherwise call it unverified); `testsFailed` means the
   run itself is not acceptable. `stale` entries ask for an approved `baseline`.
 - **2:** input error or untrustworthy evidence (`inputErrors[].code`), such as a
   missing Coverlet package, stale reports, missing test results or an unresolved
