@@ -1,12 +1,19 @@
 {
   "name": "codemetr-skills",
-  "description": "Portable Codemetr code-quality skills for coding agents.",
-  "owner": { "name": "codemetr" },
+  "description": "Portable Codemetr code-quality and test-coverage skills for coding agents.",
+  "owner": {
+    "name": "codemetr"
+  },
   "plugins": [
     {
       "name": "codemetr-csharp",
       "source": "./plugins/codemetr-csharp",
       "description": "Analyze C# code metrics and enforce existing quality guards with the Codemetr .NET tool."
+    },
+    {
+      "name": "codemetr-csharp-cover",
+      "source": "./plugins/codemetr-csharp-cover",
+      "description": "Check C# test coverage per type and member, diff coverage, CRAP risk and coverage worklists with the Codemetr cover .NET tool."
     }
   ]
 }

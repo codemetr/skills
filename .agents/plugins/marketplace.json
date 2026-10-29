@@ -1,12 +1,26 @@
 {
   "name": "codemetr-skills",
-  "interface": { "displayName": "Codemetr Skills" },
+  "interface": {
+    "displayName": "Codemetr Skills"
+  },
   "plugins": [
     {
       "name": "codemetr-csharp",
       "source": {
         "source": "local",
         "path": "./plugins/codemetr-csharp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codemetr-csharp-cover",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codemetr-csharp-cover"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -9,6 +9,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Skills per plugin, their eval files and a German routing cue each description must carry.
+PLUGINS = {
+    "codemetr-csharp": {
+        "skills": {"analyze", "guard"},
+        "evals": "evals/evals.json",
+        "queries": "evals/trigger-queries.json",
+        "cue": "Code-Metriken",
+    },
+    "codemetr-csharp-cover": {
+        "skills": {"coverage", "coverage-guard"},
+        "evals": "evals/codemetr-csharp-cover.evals.json",
+        "queries": "evals/codemetr-csharp-cover.trigger-queries.json",
+        "cue": "Testabdeckung",
+    },
+}
+
 
 def load(relative):
     return json.loads((ROOT / relative).read_text(encoding="utf-8"))
@@ -45,7 +61,11 @@ class PackagingTests(unittest.TestCase):
 
     def test_skills_and_local_references(self):
         skills = list(ROOT.glob("plugins/*/skills/*/SKILL.md"))
-        self.assertEqual({p.parent.name for p in skills}, {"analyze", "guard"})
+        self.assertEqual({p.parent.parent.parent.name for p in skills}, set(PLUGINS))
+        for plugin, spec in PLUGINS.items():
+            self.assertEqual({p.parent.name for p in skills if p.parents[2].name == plugin}, spec["skills"])
+        names = [p.parent.name for p in skills]
+        self.assertEqual(len(names), len(set(names)), "skill names must be unique across plugins")
         for path in skills:
             text = path.read_text(encoding="utf-8")
             self.assertTrue(text.startswith("---\n"), path)
@@ -62,26 +82,30 @@ class PackagingTests(unittest.TestCase):
                 self.assertTrue(resolved.is_file(), target)
 
     def test_eval_prompts_are_unique(self):
-        evals = load("evals/evals.json")["evals"]
-        self.assertGreaterEqual(len(evals), 3)
-        self.assertEqual(len(evals), len({e["id"] for e in evals}))
-        for entry in evals:
-            self.assertTrue(entry["prompt"])
-            self.assertTrue(entry["expected_output"])
+        for plugin, spec in PLUGINS.items():
+            document = load(spec["evals"])
+            self.assertEqual(document["skill_name"], plugin)
+            evals = document["evals"]
+            self.assertGreaterEqual(len(evals), 3)
+            self.assertEqual(len(evals), len({e["id"] for e in evals}))
+            for entry in evals:
+                self.assertTrue(entry["prompt"])
+                self.assertTrue(entry["expected_output"])
 
     def test_implicit_routing_metadata_and_queries(self):
-        for skill in ("analyze", "guard"):
-            text = (ROOT / "plugins/codemetr-csharp/skills" / skill / "SKILL.md").read_text(encoding="utf-8")
-            frontmatter = text.split("---", 2)[1]
-            self.assertNotIn("disable-model-invocation: true", frontmatter)
-            self.assertIn("The user need not name Codemetr", frontmatter)
-            self.assertIn("Code-Metriken", frontmatter)
-        queries = load("evals/trigger-queries.json")
-        self.assertEqual(len(queries), len({q["query"] for q in queries}))
-        for skill in ("analyze", "guard"):
-            entries = [q for q in queries if q["skill"] == skill]
-            self.assertTrue(any(q["should_trigger"] for q in entries))
-            self.assertTrue(any(not q["should_trigger"] for q in entries))
+        for plugin, spec in PLUGINS.items():
+            for skill in spec["skills"]:
+                text = (ROOT / "plugins" / plugin / "skills" / skill / "SKILL.md").read_text(encoding="utf-8")
+                frontmatter = text.split("---", 2)[1]
+                self.assertNotIn("disable-model-invocation: true", frontmatter)
+                self.assertIn("The user need not name Codemetr", frontmatter)
+                self.assertIn(spec["cue"], frontmatter)
+            queries = load(spec["queries"])
+            self.assertEqual(len(queries), len({q["query"] for q in queries}))
+            for skill in spec["skills"]:
+                entries = [q for q in queries if q["skill"] == skill]
+                self.assertTrue(any(q["should_trigger"] for q in entries), skill)
+                self.assertTrue(any(not q["should_trigger"] for q in entries), skill)
 
     def test_no_obvious_credentials_or_private_paths(self):
         # Inspect tracked and non-ignored new files; report file names, not values.

@@ -1,11 +1,13 @@
 # Codemetr Skills
 
-Portable C# code-quality skills for **Claude Code**, **GitHub Copilot CLI** and **Codex CLI**, powered by
-the [Codemetr .NET tool](https://github.com/codemetr/Codemetr.CSharp).
+Portable C# code-quality and test-coverage skills for **Claude Code**, **GitHub Copilot CLI** and **Codex CLI**,
+powered by the Codemetr .NET tools [`codemetr-csharp`](https://github.com/codemetr/Codemetr.CSharp) and
+[`codemetr-csharp-cover`](https://github.com/codemetr/Codemetr.CSharp.Cover).
 
 | Plugin | Skills |
 | --- | --- |
 | `codemetr-csharp` | `analyze`: measure and explain hotspots; `guard`: validate changes without weakening quality rules |
+| `codemetr-csharp-cover` | `coverage`: coverage per member, risky untested code, worklists below a threshold; `coverage-guard`: diff coverage and closing gaps with meaningful tests |
 
 You do not need to name Codemetr or invoke a slash command. Once installed and
 enabled, the skills can be selected by the agent for natural-language requests:
@@ -14,6 +16,9 @@ enabled, the skills can be selected by the agent for natural-language requests:
 - "Welche Klassen haben eine hohe Komplexität oder Kopplung?"
 - "Prüfe meine C#-Änderungen auf Codequalität und Grenzwertverletzungen."
 - "Check whether this refactoring worsens our C# complexity metrics."
+- "Wie hoch ist die Testabdeckung und welche Methoden sind ungetestet?"
+- "Zeige alle Stellen unter 80 Prozent Abdeckung."
+- "Prüfe, ob meine C#-Änderungen durch Tests abgedeckt sind."
 
 Selection depends on the client and model; these are routing cues, not mandatory
 keyword hooks. Explicit skill invocation remains available when needed.
@@ -34,6 +39,7 @@ updates, local development and troubleshooting.
 ```text
 /plugin marketplace add codemetr/skills
 /plugin install codemetr-csharp@codemetr-skills
+/plugin install codemetr-csharp-cover@codemetr-skills
 ```
 
 Start a new session (or reload plugins), then invoke:
@@ -41,7 +47,13 @@ Start a new session (or reload plugins), then invoke:
 ```text
 /codemetr-csharp:analyze
 /codemetr-csharp:guard
+/codemetr-csharp-cover:coverage
+/codemetr-csharp-cover:coverage-guard
 ```
+
+The coverage plugin needs `Codemetr.CSharp.Cover.Tool` **0.1.0** and a Coverlet package in each test project
+(`coverlet.collector` on VSTest, `coverlet.MTP` on Microsoft.Testing.Platform); see the
+[coverage setup](INSTALL.md#coverage-plugin).
 
 ### GitHub Copilot CLI
 
@@ -50,6 +62,7 @@ In your terminal, using a current Copilot CLI with plugin support:
 ```bash
 copilot plugin marketplace add codemetr/skills
 copilot plugin install codemetr-csharp@codemetr-skills
+copilot plugin install codemetr-csharp-cover@codemetr-skills
 ```
 
 Start a new Copilot session in your C# repository and ask, for example:
@@ -65,7 +78,7 @@ Use a current Codex CLI with plugin marketplace support:
 codex plugin marketplace add codemetr/skills
 ```
 
-Open `/plugins`, select **Codemetr Skills**, and install `codemetr-csharp`.
+Open `/plugins`, select **Codemetr Skills**, and install `codemetr-csharp` and/or `codemetr-csharp-cover`.
 Start a new session and ask to analyze C# code or run the Codemetr guard. The
 plugin browser and installation UI depend on the host and CLI version.
 

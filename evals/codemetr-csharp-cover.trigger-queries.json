@@ -1,0 +1,52 @@
+[
+  {
+    "query": "Wie hoch ist die Testabdeckung dieses C#-Projekts und welche Methoden sind gar nicht getestet?",
+    "skill": "coverage",
+    "should_trigger": true
+  },
+  {
+    "query": "Zeige alle Stellen, die unter 80 Prozent Code-Coverage liegen, als Arbeitsliste.",
+    "skill": "coverage",
+    "should_trigger": true
+  },
+  {
+    "query": "Which C# methods are complex and barely covered by tests? Measure it, do not guess.",
+    "skill": "coverage",
+    "should_trigger": true
+  },
+  {
+    "query": "Prüfe, ob meine C#-Änderungen ausreichend durch Tests abgedeckt sind, ohne die Grenzwerte zu ändern.",
+    "skill": "coverage-guard",
+    "should_trigger": true
+  },
+  {
+    "query": "Our coverage gate fails on this pull request; add the missing tests so diff coverage passes.",
+    "skill": "coverage-guard",
+    "should_trigger": true
+  },
+  {
+    "query": "Stelle sicher, dass die Testabdeckung durch mein Refactoring nicht sinkt.",
+    "skill": "coverage-guard",
+    "should_trigger": true
+  },
+  {
+    "query": "Erkläre mir allgemein, was Branch-Coverage bedeutet. Keine Messung nötig.",
+    "skill": "coverage",
+    "should_trigger": false
+  },
+  {
+    "query": "Miss die Testabdeckung unseres TypeScript-Frontends mit Jest.",
+    "skill": "coverage",
+    "should_trigger": false
+  },
+  {
+    "query": "Zeige die zyklomatische Komplexität und Kopplung unserer C#-Klassen.",
+    "skill": "coverage",
+    "should_trigger": false
+  },
+  {
+    "query": "Führe nur die Unit-Tests aus und melde, welche fehlschlagen.",
+    "skill": "coverage-guard",
+    "should_trigger": false
+  }
+]
