@@ -102,3 +102,31 @@ excluded/generated files, inactive preprocessor branches and unresolved external
 types can limit the result. Run builds and tests separately when appropriate.
 
 Upstream documentation: https://github.com/codemetr/Codemetr.CSharp
+
+
+## Member-size feature availability
+
+The member-size work is a development feature in Codemetr.CSharp feature 006;
+this plugin update does not claim that published tool 0.1.0 implements it. Preserve
+the consuming repository's pinned version. Only use the following fields/rules
+with a release explicitly documenting their support. Plugin 0.3.0 and the tool
+version are independent; no automatic tool upgrade is authorised by installation.
+
+- `members[].lines` remains the declaration span. New `codeLines` counts physical
+  body-token lines excluding signatures, comments and braces. Multiline tokens
+  occupy all their physical lines, including blank literal lines.
+- `statementCount` counts syntactic statements, excluding blocks, empty statements
+  and local-function declarations; controls and declarations count alongside child
+  statements. Expression-bodied members add one root statement. Lambda block
+  statements belong to the owner; local functions are measured separately.
+- `memberHotspots` contains source identity, size, cyclomatic/cognitive complexity,
+  nesting and parameters. It ranks by code lines, statements and complexity, with
+  stable source/name ties. `--top 0` suppresses both lists; scope filters still apply.
+- Optional `maxMemberCodeLines` and `maxMemberStatements` default to disabled.
+  Their rule IDs are `memberCodeLines` and `memberStatements`. Equality passes;
+  overrides, guard exit codes and baseline ratchets retain their existing meaning.
+- Coverage is unavailable unless actually measured; absent coverage is not zero.
+  Automatic source-bound Cover joining is a separate follow-up, not a plugin feature.
+
+See the upstream member-size example and measurement definitions after the feature
+lands. Until then, explain unavailability rather than simulating new tool output.

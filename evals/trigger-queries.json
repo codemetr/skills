@@ -8,5 +8,6 @@
   { "query": "Erkläre mir allgemein, was zyklomatische Komplexität bedeutet. Keine Repository-Analyse nötig.", "skill": "analyze", "should_trigger": false },
   { "query": "Miss Komplexität und Kopplung unseres Python-Pakets. Dieses Repository enthält keinen C#-Code.", "skill": "analyze", "should_trigger": false },
   { "query": "Prüfe unser C#-Projekt ausschließlich auf bekannte Sicherheitslücken in NuGet-Abhängigkeiten.", "skill": "guard", "should_trigger": false },
-  { "query": "Führe nur die bestehenden C#-Unit-Tests aus und melde deren Ergebnis, keine weiteren Qualitätsprüfungen.", "skill": "guard", "should_trigger": false }
+  { "query": "Führe nur die bestehenden C#-Unit-Tests aus und melde deren Ergebnis, keine weiteren Qualitätsprüfungen.", "skill": "guard", "should_trigger": false },
+  {"query": "Welche C#-Methoden sind besonders lang, auch wenn sie kaum Verzweigungen haben? Bitte die Methodenlänge messen.", "skill": "analyze", "should_trigger": true}
 ]

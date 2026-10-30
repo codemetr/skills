@@ -1,6 +1,6 @@
 {
   "name": "codemetr-csharp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Analyze C# code metrics and enforce existing quality guards with the Codemetr .NET tool.",
   "skills": "./skills/"
 }

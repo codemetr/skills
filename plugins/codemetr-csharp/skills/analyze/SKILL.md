@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: Measure and explain C#/.NET code metrics with Codemetr. Use when users ask about code metrics, code quality analysis, complexity, coupling, maintainability, nesting or refactoring hotspots, including German requests such as Code-Metriken, Codemetriken, Code Metriken, Komplexität, Kopplung, Wartbarkeit, Verschachtelung or technischen Schulden. The user need not name Codemetr or this skill. Prefer guard for pass/fail checks or validating code changes. Only applies to C# sources; measures code rather than guessing values.
+description: Measure and explain C#/.NET code metrics with Codemetr. Use when users ask about code metrics, code quality analysis, complexity, coupling, maintainability, nesting or refactoring hotspots, including German requests such as Code-Metriken, Codemetriken, Code Metriken, Komplexität, Kopplung, Wartbarkeit, Verschachtelung or technischen Schulden. The user need not name Codemetr or this skill. Prefer guard for pass/fail checks or validating code changes. Only applies to C# sources; measures code rather than guessing values. Includes method length, long functions and German Methodenlänge or lange Methoden requests.
 license: MIT
 compatibility: Requires shell access, the .NET 10 SDK, and Codemetr.CSharp.Tool. No source checkout of the tool is needed.
 ---
@@ -46,6 +46,20 @@ feature unavailability instead of silently upgrading it.
 An `analyze` exit code of 0 does not mean the guard passed: analyze
 reports violations without failing on them. Do not invent measurements if the
 command cannot run. Report the blocker instead.
+
+## Individual methods and body size
+
+When the selected tool reports `memberHotspots`, inspect the member identity and
+source location alongside `codeLines`, `statementCount`, cyclomatic/cognitive
+complexity, nesting and parameters. Long straight-line methods can be hotspots
+without high branching complexity. `--top` limits each type/member list separately;
+it does not change the full measurement or guard scope. Consult the reference for
+exact token/statement definitions and feature availability.
+
+Published 0.1.0 has no member-size fields or rules. If absent, report that limitation
+and use available member complexity; do not invent lengths or replace the pinned
+tool. No coverage is inferred from static hotspots. A Cover report may be discussed
+separately with its own source provenance; automatic joining is not implemented.
 
 ## Explain
 
