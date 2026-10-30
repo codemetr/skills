@@ -68,7 +68,7 @@ include secrets in reports.
 
 ## Optional member-size rules
 
-A feature-capable tool supports `maxMemberCodeLines` and `maxMemberStatements`.
+Published tool 0.2.0 supports `maxMemberCodeLines` and `maxMemberStatements`.
 They are disabled by default and use `memberCodeLines`/`memberStatements` rule IDs,
 with inclusive limits and the existing overrides/baseline ratchet. Published tool
 0.1.0 does not accept these fields. Check feature availability before proposing

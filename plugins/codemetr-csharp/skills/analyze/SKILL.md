@@ -49,7 +49,7 @@ command cannot run. Report the blocker instead.
 
 ## Individual methods and body size
 
-When the selected tool reports `memberHotspots`, inspect the member identity and
+Tool 0.2.0 adds `memberHotspots`. When the selected tool reports it, inspect the member identity and
 source location alongside `codeLines`, `statementCount`, cyclomatic/cognitive
 complexity, nesting and parameters. Long straight-line methods can be hotspots
 without high branching complexity. `--top` limits each type/member list separately;

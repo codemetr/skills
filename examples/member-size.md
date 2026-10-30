@@ -1,17 +1,17 @@
 # Member-size adoption
 
 Use the target repository's existing tool and read its versioned documentation.
-Tool 0.1.0 has member complexity but no codeLines, statementCount, memberHotspots,
-maxMemberCodeLines or maxMemberStatements. This plugin's 0.3.0 guidance is forward
-compatible; do not install a local development package or silently upgrade a pin.
+Published tool **0.2.0** provides codeLines, statementCount, memberHotspots,
+maxMemberCodeLines and maxMemberStatements. Tool 0.1.0 does not. Plugin 0.3.1
+supports both by checking availability; never silently upgrade a consumer pin.
 
-For a release explicitly supporting the feature, analyse the intended source with
+With tool 0.2.0, analyse the intended source using
 `codemetr-csharp analyze src --format json --top 10` (prefix with `dotnet tool run`
 for a local installation). Inspect memberHotspots with exact source/overload identity.
 Code lines and syntactic statements distinguish a long flat method from a short
 branch-heavy one. They do not prove that a method has a single responsibility.
 
-After explicit policy approval, a feature-capable configuration can include:
+After explicit policy approval, a tool 0.2.0 configuration can include:
 
 ```json
 { "rules": { "maxMemberCodeLines": 40, "maxMemberStatements": 25 } }

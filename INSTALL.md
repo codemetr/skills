@@ -34,7 +34,7 @@ If there is no existing tool manifest:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install Codemetr.CSharp.Tool --version 0.1.0
+dotnet tool install Codemetr.CSharp.Tool --version 0.2.0
 dotnet tool run codemetr-csharp --help
 ```
 
@@ -53,7 +53,7 @@ Installation and restoration use your configured NuGet sources.
 ### Alternative: global installation
 
 ```bash
-dotnet tool install --global Codemetr.CSharp.Tool --version 0.1.0
+dotnet tool install --global Codemetr.CSharp.Tool --version 0.2.0
 codemetr-csharp --help
 ```
 
@@ -297,7 +297,7 @@ before switching to GitHub.
 
 ## Member-size compatibility
 
-Plugin 0.3.0 can interpret `codeLines`, `statementCount` and `memberHotspots` from
-a future feature-capable tool release. The documented published 0.1.0 installation
-does not provide them. A plugin update never authorises changing a consuming
-repository's pinned tool or enabling new limits. See examples/member-size.md.
+Plugin 0.3.1 interprets `codeLines`, `statementCount` and `memberHotspots` from
+published tool 0.2.0. Older tool 0.1.0 does not provide them. A plugin update never
+authorises changing a consuming repository's pinned tool or enabling new limits.
+See examples/member-size.md.

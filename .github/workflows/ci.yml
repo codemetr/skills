@@ -24,9 +24,20 @@ jobs:
       - name: Smoke-test published tool without its source
         shell: bash
         run: |
-          dotnet tool install Codemetr.CSharp.Tool --version 0.1.0 --tool-path "$RUNNER_TEMP/codemetr-tool" --source https://api.nuget.org/v3/index.json
+          dotnet tool install Codemetr.CSharp.Tool --version 0.2.0 --tool-path "$RUNNER_TEMP/codemetr-tool" --source https://api.nuget.org/v3/index.json
           "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" --help
           "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" check tests/fixtures/clean --format json
+          "$RUNNER_TEMP/codemetr-tool/codemetr-csharp" analyze --root tests/fixtures/member-size --format json > "$RUNNER_TEMP/member-size.json"
+          python - "$RUNNER_TEMP/member-size.json" <<'PYTHON'
+          import json, sys
+          with open(sys.argv[1], encoding="utf-8") as source:
+              report = json.load(source)
+          member = report["memberHotspots"][0]
+          assert report["version"] == "0.2.0", report["version"]
+          assert member["codeLines"] == 3, member
+          assert member["statementCount"] == 3, member
+          assert report["violations"][0]["rule"] == "memberStatements", report["violations"]
+          PYTHON
       - name: Smoke-test published cover tool without its source
         shell: bash
         run: |

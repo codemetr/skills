@@ -38,19 +38,19 @@ local installation can be created from the target repository root:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install Codemetr.CSharp.Tool --version 0.1.0
+dotnet tool install Codemetr.CSharp.Tool --version 0.2.0
 dotnet tool run codemetr-csharp --help
 ```
 
 Do not create or overwrite a manifest that already exists. If the tool is
 already declared but not restored, ask before running `dotnet tool restore`.
 Do not automatically update a pinned version. The plugin version and tool
-version are independent; new installations in these examples target tool `0.1.0`.
+version are independent; new installations in these examples target tool `0.2.0`.
 
 A global installation is an alternative, also requiring permission:
 
 ```bash
-dotnet tool install --global Codemetr.CSharp.Tool --version 0.1.0
+dotnet tool install --global Codemetr.CSharp.Tool --version 0.2.0
 codemetr-csharp --help
 ```
 
@@ -106,11 +106,10 @@ Upstream documentation: https://github.com/codemetr/Codemetr.CSharp
 
 ## Member-size feature availability
 
-The member-size work is a development feature in Codemetr.CSharp feature 006;
-this plugin update does not claim that published tool 0.1.0 implements it. Preserve
-the consuming repository's pinned version. Only use the following fields/rules
-with a release explicitly documenting their support. Plugin 0.3.0 and the tool
-version are independent; no automatic tool upgrade is authorised by installation.
+Published tool **0.2.0** provides the following member-size fields and rules.
+Older tool 0.1.0 does not. Preserve consuming repository pins and obtain approval
+for upgrades or new limits. Plugin **0.3.1** and the tool version are independent;
+plugin installation does not authorise upgrading a consumer's tool.
 
 - `members[].lines` remains the declaration span. New `codeLines` counts physical
   body-token lines excluding signatures, comments and braces. Multiline tokens
@@ -128,5 +127,5 @@ version are independent; no automatic tool upgrade is authorised by installation
 - Coverage is unavailable unless actually measured; absent coverage is not zero.
   Automatic source-bound Cover joining is a separate follow-up, not a plugin feature.
 
-See the upstream member-size example and measurement definitions after the feature
-lands. Until then, explain unavailability rather than simulating new tool output.
+See the upstream member-size example and measurement definitions. Explain feature
+unavailability for older pinned tools rather than simulating output.
