@@ -293,3 +293,11 @@ before switching to GitHub.
 - [Codemetr tool documentation](https://github.com/codemetr/Codemetr.CSharp)
 - [Codemetr cover tool documentation](https://github.com/codemetr/Codemetr.CSharp.Cover)
 - [Security guidance](SECURITY.md)
+
+
+## Member-size compatibility
+
+Plugin 0.3.0 can interpret `codeLines`, `statementCount` and `memberHotspots` from
+a future feature-capable tool release. The documented published 0.1.0 installation
+does not provide them. A plugin update never authorises changing a consuming
+repository's pinned tool or enabling new limits. See examples/member-size.md.

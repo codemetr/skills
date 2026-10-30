@@ -24,6 +24,11 @@
       "prompt": "Continue the Codemetr setup we discussed: I approve creating a local tool manifest in this C# repository, installing Codemetr.CSharp.Tool 0.0.1 from NuGet, and running the full guard. The .NET 10 SDK is available and no tool manifest exists. Do not install a global tool or change our quality rules.",
       "expected_output": "Creates the approved local manifest, installs the approved version, verifies the local tool with --help and runs the full check. Preserves guard policy, reports the actual exit code, and does not switch to a global installation or different version on failure.",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Find long C# methods and add a method-size gate. The repository pins Codemetr tool 0.1.0; do not upgrade it.",
+      "expected_output": "Explains that 0.1.0 lacks codeLines, statementCount, memberHotspots and optional member-size rules; preserves the pin and configuration, reports available complexity and requests an explicit future policy/version decision rather than inventing size or coverage values."
     }
   ]
 }
