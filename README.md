@@ -27,7 +27,7 @@ keyword hooks. Explicit skill invocation remains available when needed.
 ## Quick start
 
 Requires the .NET 10 SDK and the separately installed `Codemetr.CSharp.Tool`.
-New installations target tool **0.1.0**; plugin **0.3.0** has an independent
+New installations target tool **0.2.0**; plugin **0.3.1** has an independent
 version. Existing projects keep their pinned tool unless an upgrade is approved.
 If prerequisites are missing, the skills offer to install or restore them, wait
 for confirmation, then verify setup and continue the requested task.
@@ -121,8 +121,8 @@ private reports or private source fixtures. See [SECURITY.md](SECURITY.md).
 
 ## Individual-method guidance
 
-Plugin 0.3.0 explains optional member-size measurements and static member hotspots
-when the selected tool supports them. Published tool 0.1.0 does not contain the
-feature; existing tool pins and installation examples remain unchanged. See
-[member-size adoption](examples/member-size.md) for definitions and the capability
-check. Coverage joining is explicitly separate from static metrics.
+Plugin 0.3.1 explains member-size measurements and static member hotspots from
+published tool 0.2.0. Older tool 0.1.0 lacks these fields; existing repository pins
+remain unchanged until an upgrade is approved. See
+[member-size adoption](examples/member-size.md) for definitions and version checks.
+Coverage joining remains separate from static metrics.
